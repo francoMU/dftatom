@@ -29,6 +29,7 @@ endif()
 
 if(WITH_C_INTERFACE)
     set(SRC ${SRC} c_dftatom.f90)
+    #target_sources(dftatom PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/c_dftatom.h)
 endif()
 
 add_library(dftatom SHARED ${SRC})
@@ -37,6 +38,9 @@ target_include_directories(dftatom PUBLIC
     $<INSTALL_INTERFACE:include/dftatom>
 )
 target_link_libraries(dftatom ${LIBS})
+
+target_include_directories(dftatom PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
 install(TARGETS dftatom
             RUNTIME DESTINATION bin
             ARCHIVE DESTINATION lib
